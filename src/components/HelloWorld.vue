@@ -63,6 +63,20 @@
         </li>
       </ul>
     </div>
+    <hr>
+    <div>
+      <h1>Load more</h1>
+      <table class="tables">
+        <tr>
+          <th>id</th>
+          <th>name</th>
+        </tr>
+        <tr v-for="itemsview in ItemListView">
+          <td>{{itemsview.Id}}</td>
+          <td>{{itemsview.names}}</td>
+        </tr>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -87,7 +101,8 @@ export default {
         author: "Jane Doe",
         publishedAt: "2016-04-10"
       },
-      resultbyID: []
+      resultbyID: [],
+      ItemListView: []
     };
   },
   methods: {
@@ -138,6 +153,12 @@ export default {
       console.log(res);
       const result = await res.json();
       console.log(result);
+    },
+    Items: function() {
+      for (var i = 0; i < 10; i++) {
+        this.ItemListView.push({ Id: i, names: "item" + i });
+      }
+      console.log(JSON.stringify(this.ItemListView))
     }
   },
   computed: {
@@ -159,6 +180,16 @@ export default {
       userId: 1
     });
     //this.posData();
+
+    this.Items();
   }
 };
 </script>
+
+<style>
+.tables{
+  width: 100%;
+  height: 100px;
+  text-align: center
+}
+</style>
